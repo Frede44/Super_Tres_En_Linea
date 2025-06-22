@@ -1,11 +1,139 @@
-*{
+/* Reset básico */
+* {
     padding: 0;
     margin: 0;
 }
 
-body{
-    background-color: rgb(74, 74, 74);
+/* Fondo y alineación general */
+body {
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+/* Contenedor del juego */
+.container {
+    margin: 20px;
+}
+
+/* Tablero principal 3x3 */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: stretch;
+    align-items: stretch;
+    gap: 0;
+}
+
+/* Celda principal (cada uno de los 9 cuadros grandes) */
+.cell_principal {
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Sub-tablero 3x3 */
+.cell_game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 80%;
+    height: 80%;
+    justify-items: stretch;
+    align-items: stretch;
+    gap: 0;
+}
+
+#cell_0,
+#cell_1,
+#cell_2{
+    border-bottom: 4px solid black;
+}
+
+#cell_3,
+#cell_4,
+#cell_5{
+    border-bottom: 4px solid black;
+}
+
+#cell_1,
+#cell_4,
+#cell_7{
+    border-right: 4px solid black;
+    border-left: 4px solid black;
+}
+
+
+
+
+
+
+/* Celdas pequeñas */
+.cell {
+    background-color: #fff;
+    width: 100%;
+    /* Ahora usa 100% para adaptarse al grid */
+    height: 100%;
+    box-sizing: border-box;
+    /* El borde NO aumenta el tamaño total */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: cursive, sans-serif;
+    font-size: 40px;
+    padding: 0;
+    margin: 0;
+
+    font-style: normal;
+
+
+}
+
+.cell:hover {
+    cursor: pointer;
+}
+
+.cell1,
+.cell2,
+.cell3 {
+    border-bottom: 2px solid black;
+}
+
+.cell4,
+.cell5,
+.cell6 {
+    border-bottom: 2px solid black;
+}
+
+.cell2,
+.cell5,
+.cell8 {
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+}
+
+
+/* Ocultar mensaje de usuario ganador por defecto */
+.user_win {
+    display: none;
+}
+
+/* Posición de las celdas principales para crear la cuadrícula 3x3 */
+#cell_3,
+#cell_4,
+#cell_5 {
+    grid-row-start: 2;
+}
+
+#cell_6,
+#cell_7,
+#cell_8 {
+    grid-row-start: 3;
 }
