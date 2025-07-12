@@ -39,6 +39,13 @@ body {
     box-sizing: border-box;
 }
 
+.cell_principal_desactivada {
+    background-color: #c0baba;
+    cursor: not-allowed;
+}
+
+
+
 /* Sub-tablero 3x3 */
 .cell_game {
     display: grid;
@@ -73,7 +80,23 @@ body {
 
 
 
+.cell_dessactivada {
+    background-color: #c0baba;
+    width: 100%;
+    /* Ahora usa 100% para adaptarse al grid */
+    height: 100%;
+    box-sizing: border-box;
+    /* El borde NO aumenta el tamaño total */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: cursive, sans-serif;
+    font-size: 30px;
+    padding: 0;
+    margin: 0;
 
+    font-style: normal;
+}
 
 /* Celdas pequeñas */
 .cell {
@@ -87,7 +110,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: cursive, sans-serif;
-    font-size: 40px;
+    font-size: 30px;
     padding: 0;
     margin: 0;
 
@@ -120,6 +143,8 @@ body {
 }
 
 
+
+
 /* Ocultar mensaje de usuario ganador por defecto */
 .user_win {
     display: none;
@@ -136,4 +161,27 @@ body {
 #cell_7,
 #cell_8 {
     grid-row-start: 3;
+}
+
+@media screen and (max-width: 600px) {
+    /* Ajustes para pantallas pequeñas */
+    .game-board {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .cell_principal {
+        width: 100px;
+        height: 100px;
+    }
+
+    .cell_game {
+        width: 80%;
+        height: 80%;
+    }
+
+    .cell {
+        font-size: 20px;
+    }
+    
 }
