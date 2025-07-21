@@ -4,15 +4,32 @@ const ResetButton = document.getElementById("reset-button");
 const casillas = document.querySelectorAll(".cell");
 const cellPrincipal = document.querySelectorAll(".cell_principal");
 const divPrincipal = document.querySelector(".game-board")
+const divWin =  document.getElementById("user-wins")
 const casillaId = [];
 const text = [];
 const contenidoCasilla = [];
 const divJuego = document.querySelectorAll(".cell_game");
 const divGanador = document.querySelectorAll(".win")
+const us = document.querySelector(".User")
 
 
 function switchUser() {
     user = !user;
+
+}
+
+function win(){
+    divPrincipal.style.display =  "none"
+
+    divWin.style.display = "flex"
+
+    if (user) {
+        us.textContent = "X"
+    }else{
+        us.textContent = "O"
+    }
+
+    
 
 }
 
@@ -41,8 +58,8 @@ function userWins() {
         const [a, b, c] = combinacion
 
         if (text[a] && text[a] === text[b] && text[a] === text[c]) {
-            console.log("el ganador es " + text[a]);
-            divPrincipal.style.display = "none"; // Ocultar el tablero principal
+                win()
+            
             return; // Salir de la función si hay un ganador
         }
 
@@ -459,16 +476,5 @@ casillas.forEach((casilla) => {
 ResetButton.addEventListener("click", reinicio);
 
 function reinicio() {
-    casillas.forEach((casilla) => {
-        casilla.textContent = "";
-        casilla.classList.remove("cell_dessactivada"); // quitar clase para habilitar visualmente
-        casilla.classList.add("cell"); // agregar clase para deshabilitar visualmente
-
-    });
-
-    cellPrincipal.forEach((cell) => {
-        cell.style.pointerEvents = "auto"; // habilitar todas las casillas principales
-        cell.classList.remove("cell_principal_desactivada"); // agregar clase para deshabilitar visualmente
-    });
-    user = true;
+   location.reload()
 }

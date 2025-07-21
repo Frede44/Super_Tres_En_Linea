@@ -170,6 +170,16 @@ body {
     grid-row-start: 3;
 }
 
+#user-wins{
+    display: none;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#user-wins p{
+
+}
+
 @media screen and (max-width: 600px) {
     /* Ajustes para pantallas pequeñas */
     .game-board {
