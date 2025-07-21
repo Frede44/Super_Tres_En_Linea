@@ -152,10 +152,7 @@ body {
 
 
 
-/* Ocultar mensaje de usuario ganador por defecto */
-.user_win {
-    display: none;
-}
+
 
 /* Posición de las celdas principales para crear la cuadrícula 3x3 */
 #cell_3,

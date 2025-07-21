@@ -24,9 +24,9 @@ function win(){
     divWin.style.display = "flex"
 
     if (user) {
-        us.textContent = "X"
+        us.textContent = "El usuario X ha ganado"
     }else{
-        us.textContent = "O"
+        us.textContent = "El usuario O ha ganado"
     }
 
     
