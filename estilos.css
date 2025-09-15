@@ -2,20 +2,51 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 /* Fondo y alineación general */
 body {
-    background-color: #ffffff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: 'Pacifico', cursive;
+}
+
+/* Título principal */
+h1 {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    to {
+        text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.4);
+    }
 }
 
 /* Contenedor del juego */
 .container {
     margin: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 /* Tablero principal 3x3 */
@@ -25,23 +56,38 @@ body {
     grid-template-rows: repeat(3, 1fr);
     justify-items: stretch;
     align-items: stretch;
-    gap: 0;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 6px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Celda principal (cada uno de los 9 cuadros grandes) */
 .cell_principal {
     width: 200px;
     height: 200px;
-    background-color: #fff;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cell_principal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .cell_principal_desactivada {
-    background-color: #c0baba;
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
     cursor: not-allowed;
+    opacity: 0.6;
+    transform: none !important;
 }
 
 
@@ -51,102 +97,136 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     justify-items: stretch;
     align-items: stretch;
-    gap: 0;
+    gap: 2px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2px;
 }
 
 #cell_0,
 #cell_1,
 #cell_2{
-    border-bottom: 4px solid black;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 #cell_3,
 #cell_4,
 #cell_5{
-    border-bottom: 4px solid black;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 #cell_1,
 #cell_4,
 #cell_7{
-    border-right: 4px solid black;
-    border-left: 4px solid black;
+    border-right: 3px solid rgba(255, 255, 255, 0.3);
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 
 
 
 .cell_dessactivada {
-    background-color: #c0baba;
+    background: linear-gradient(135deg, #d1d5db 0%, #9ca3af 100%);
     width: 100%;
-    /* Ahora usa 100% para adaptarse al grid */
     height: 100%;
     box-sizing: border-box;
-    /* El borde NO aumenta el tamaño total */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: cursive, sans-serif;
+    font-family: 'Pacifico', cursive;
     font-size: 30px;
     padding: 0;
     margin: 0;
-
     font-style: normal;
+    border-radius: 6px;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* Celdas pequeñas */
 .cell {
-    background-color: #fff;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     width: 100%;
-    /* Ahora usa 100% para adaptarse al grid */
     height: 100%;
     box-sizing: border-box;
-    /* El borde NO aumenta el tamaño total */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: cursive, sans-serif;
-    font-size: 30px;
+    font-family: 'Pacifico', cursive;
+    font-size: 28px;
     padding: 0;
     margin: 0;
-
     font-style: normal;
-
-
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
 }
 
-.win{
-    color: rgb(70, 246, 21);
-    font-size: 200px;
-    
+.cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
 
+.cell:hover::before {
+    left: 100%;
 }
 
 .cell:hover {
-    cursor: pointer;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.win{
+    color: #10b981;
+    font-size: 180px;
+    font-family: 'Pacifico', cursive;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: winPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes winPulse {
+    from {
+        transform: scale(1);
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    to {
+        transform: scale(1.05);
+        text-shadow: 2px 2px 15px rgba(16, 185, 129, 0.5);
+    }
 }
 
 .cell1,
 .cell2,
 .cell3 {
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .cell4,
 .cell5,
 .cell6 {
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .cell2,
 .cell5,
 .cell8 {
-    border-right: 2px solid black;
-    border-left: 2px solid black;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 
@@ -170,36 +250,137 @@ body {
 #user-wins{
     display: none;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 2rem 0;
 }
 
 #user-wins p{
-
+    color: #1f2937;
+    font-size: 2.5rem;
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-@media screen and (max-width: 600px) {
-    /* Ajustes para pantallas pequeñas */
+/* Botón de reinicio */
+#reset-button {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-family: 'Pacifico', cursive;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    margin-top: 1.5rem;
+}
+
+#reset-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+#reset-button:active {
+    transform: translateY(0);
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .container {
+        margin: 10px;
+        padding: 1.5rem;
+    }
+    
     .game-board {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, 1fr);
+        gap: 4px;
+        padding: 4px;
     }
 
     .cell_principal {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
     }
 
     .cell_game {
-        width: 80%;
-        height: 80%;
+        width: 90%;
+        height: 90%;
+        gap: 1px;
+        padding: 1px;
     }
 
     .cell {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .win {
-        font-size: 100px;
+        font-size: 120px;
     }
     
+    #user-wins p {
+        font-size: 2rem;
+    }
+    
+    #reset-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .container {
+        margin: 5px;
+        padding: 1rem;
+    }
+    
+    .game-board {
+        gap: 3px;
+        padding: 3px;
+    }
+
+    .cell_principal {
+        width: 90px;
+        height: 90px;
+    }
+
+    .cell_game {
+        width: 85%;
+        height: 85%;
+    }
+
+    .cell {
+        font-size: 18px;
+    }
+
+    .win {
+        font-size: 90px;
+    }
+    
+    #user-wins p {
+        font-size: 1.5rem;
+    }
+    
+    #reset-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
 }
